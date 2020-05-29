@@ -1,1 +1,1 @@
-# fullstackopen2020AllanWilson_3_Phonebook_Backend
+start backend using nodemon with 'npm run dev'
