@@ -5,8 +5,6 @@ const app = express()
 app.use(express.json())
 
 let persons = [
-{
-  "persons": [
     {
       "name": "Arto Hellas",
       "number": "040-123456",
@@ -28,8 +26,6 @@ let persons = [
       "id": 4
     }
   ]
-}
-  ]
   
   app.get('/', (req, res) => {
     res.send('<h1>Persons Backend</h1>')
@@ -37,6 +33,13 @@ let persons = [
   
   app.get('/api/persons', (req, res) => {
     res.json(persons)
+  })
+
+  app.get('/info', (req, res) => {
+    res.send(`
+    <p>Phonebook has info for ${persons.length} people</p>
+    <p>${Date()}</p>
+    `)
   })
 
 const port = 3001
