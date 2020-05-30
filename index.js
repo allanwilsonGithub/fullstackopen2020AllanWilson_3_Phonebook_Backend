@@ -1,9 +1,16 @@
 const http = require('http')
 const express = require('express')
-const app = express()
+const bodyParser = require('body-parser')
+const morgan = require('morgan')
 
+const app = express()
 app.use(express.json())
 
+morgan.token('id', function getId (req) {
+  return req.id
+})
+
+app.use(morgan(':id :method :url :response-time: '))
 let persons = [
     {
       "name": "Arto Hellas",
