@@ -64,14 +64,23 @@ let persons = [
     return Math.floor(Math.random() * Math.floor(9999));
   }
 
-  app.post('/api/persons', (request, response) => {
-    const body = request.body
+  app.post('/api/persons', (req, res) => {
+    const body = req.body
   
     if (!body.name) {
       return res.status(400).json({ 
-        error: 'content missing' 
+        error: 'name missing'
+      })
+    } else if (!body.number) {
+      return res.status(400).json({
+            error: 'number missing'
+      })
+    } else if (persons.find(person => person.name === body.name)) {
+      return res.status(400).json({
+            error: 'name already exists'
       })
     }
+
   
     const person = {
       content: body.content,
@@ -82,7 +91,7 @@ let persons = [
   
     persons = persons.concat(person)
   
-    response.json(person)
+    res.json(person)
   })
 
 const port = 3001
