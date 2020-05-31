@@ -10,7 +10,11 @@ morgan.token('id', function getId (req) {
   return req.id
 })
 
-app.use(morgan(':id :method :url :response-time: '))
+morgan.token('content', function (req, res) {
+  return JSON.stringify(req.body)
+})
+
+app.use(morgan(':id :method :url :response-time :content'))
 let persons = [
     {
       "name": "Arto Hellas",
