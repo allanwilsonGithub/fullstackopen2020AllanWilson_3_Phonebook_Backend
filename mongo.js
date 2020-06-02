@@ -14,23 +14,30 @@ const url =
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
 
-const noteSchema = new mongoose.Schema({
+const personSchema = new mongoose.Schema({
   name: String,
   number: String,
 })
 
-const Person = mongoose.model('Person', noteSchema)
+const Person = mongoose.model('Person', personSchema)
 
 const person = new Person({
   name: `${input_name}`,
   number: `${input_number}`,
 })
 
+
 if (input_name) {
-  person.save().then(result => {
-    console.log(`added ${input_name} number ${input_number} to phonebook`)
-    mongoose.connection.close()
-   })
+      person.save().then(result => {
+      console.log(`added ${input_name} number ${input_number} to phonebook`)
+      mongoose.connection.close()
+     })
    } else {
-     console.log('woohoo')
+      console.log(`phonebook:`)
+      Person.find({}).then(result => {
+      result.forEach(person => {
+      console.log(`${person['name']} ${person['number']}`)
+      mongoose.connection.close()
+      })
+      })
    }
