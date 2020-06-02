@@ -56,15 +56,11 @@ app.delete('/api/persons/:id', (req, res) => {
     res.status(204).end()
 })
 
-const generateRandomId = () => {
-    return Math.floor(Math.random() * Math.floor(9999));
-}
-
 app.post('/api/persons', (req, res) => {
   const body = req.body
 
 
-if (!body.name) {
+  if (!body.name) {
     return res.status(400).json({ 
       error: 'name missing'
     })
@@ -72,16 +68,11 @@ if (!body.name) {
       return res.status(400).json({
             error: 'number missing'
     })
-    } else if (!body.id) {
-      return res.status(400).json({
-            error: 'id missing'
-    })
   }
 
-    const person = new Person({
+  const person = new Person({
       name: body.name || false,
-      number: body.number || false,
-      id: generateRandomId() || false
+      number: body.number || false
     })
   
   person.save().then(savedPerson => {
