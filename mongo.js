@@ -28,16 +28,16 @@ const person = new Person({
 
 
 if (input_name) {
-      person.save().then(result => {
-      console.log(`added ${input_name} number ${input_number} to phonebook`)
-      mongoose.connection.close()
-     })
-   } else {
-      console.log(`phonebook:`)
-      Person.find({}).then(result => {
-      result.forEach(person => {
+  person.save().then(result => {
+    console.log(`added ${input_name} number ${input_number} to phonebook`)
+    mongoose.connection.close()
+  })
+} else {
+  console.log(`phonebook:`)
+  Person.find({}).then(result => {
+    result.forEach(person => {
       console.log(`${person['name']} ${person['number']}`)
       mongoose.connection.close()
-      })
-      })
-   }
+    })
+  })
+}
